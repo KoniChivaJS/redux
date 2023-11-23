@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {createStore} from 'redux';
 
-const initialState = 0;
-
 const reducer = (state = 0,action) => {
 
   if(action.type === 'INC'){
@@ -14,7 +12,7 @@ const reducer = (state = 0,action) => {
     return state - 1;
   }
   if(action.type === 'RND'){
-    return Math.ceil(Math.random() * (50+50) - 50);
+    return action.payload;
   }
 
   return state;
@@ -37,7 +35,8 @@ document.getElementById('inc').addEventListener('click',()=>{
   store.dispatch({type:'INC'});
 })
 document.getElementById('rnd').addEventListener('click',()=>{
-  store.dispatch({type:'RND'});
+  const value = Math.ceil(Math.random() * (50+50) - 50);
+  store.dispatch({type:'RND',payload:value});
 })
 
 
